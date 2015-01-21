@@ -52,6 +52,8 @@
 (setq indent-tabs-mode nil)
 (setq tab-always-indent t)
 (setq tab-width 4)
+(setq global-visual-line-mode 1)
+(setq visual-line-mode 1)
 
 (setq org-src-fontify-natively 't)
 
@@ -73,7 +75,7 @@
 (defvar aquamacs-p (boundp 'aquamacs-version))
 
 
-
+(setq adaptive-wrap-extra-indent 2)
 (when (fboundp 'adaptive-wrap-prefix-mode)
   (defun my-activate-adaptive-wrap-prefix-mode ()
     "Toggle `visual-line-mode' and `adaptive-wrap-prefix-mode' simultaneously."
