@@ -12,7 +12,7 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
 
-(defvar my-packages '(dired-x org undo-tree adaptive-wrap))
+(defvar my-packages '(dired-x org undo-tree adaptive-wrap magit))
 
 (unless package-archive-contents
   (package-refresh-contents))
