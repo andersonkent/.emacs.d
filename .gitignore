@@ -1,0 +1,6 @@
+SessionDesktop.el
+elpa/
+tramp
+auto-save-list/
+*.elc
+*.cask
