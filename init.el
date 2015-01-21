@@ -4,15 +4,15 @@
 (setq inhibit-startup-screen t)
 
 ;; Auto-install packages.  This makes it really easy to move between
-;; environments.
+;; environments. NOTE: Aquamacs puts downloaded packages into
+;; ~/Library/Preferences/Aquamacs Emacs/Packages/elpa
 (require 'package)
-(setq package-archives '(("org" . "http://orgmode.org/elpa/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+(add-to-list 'package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+				 ("melpa" . "http://melpa.milkbox.net/packages/")
+				 ("marmalade" . "http://marmalade-repo.org/packages/")))
 (package-initialize)
 
-(defvar my-packages '(dired-x org undo-tree adaptive-wrap magit))
+(defvar my-packages '(org flycheck undo-tree adaptive-wrap magit swift-mode))
 
 (unless package-archive-contents
   (package-refresh-contents))
