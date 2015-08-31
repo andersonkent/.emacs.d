@@ -7,12 +7,10 @@
 ;; environments. NOTE: Aquamacs puts downloaded packages into
 ;; ~/Library/Preferences/Aquamacs Emacs/Packages/elpa
 (require 'package)
-(add-to-list 'package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-				 ("melpa" . "http://melpa.milkbox.net/packages/")
-				 ("marmalade" . "http://marmalade-repo.org/packages/")))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
-
-(defvar my-packages '(org flycheck undo-tree adaptive-wrap magit swift-mode))
+(defvar my-packages '(org flycheck undo-tree adaptive-wrap magit swift-mode omnisharp evil company))
 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -21,6 +19,8 @@
     (ignore-errors
       (package-install package))))
 
+
+(load "~/.emacs.d/evil-mode-init.el")
 
 ;; I really hate having to type 'yes' most, but not all, of the time...
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -43,9 +43,10 @@
 (setq font-lock-maximum-decoration t)
 
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#efefef")
+;;(set-face-background 'hl-line "#efefef")
 
-(set-face-attribute 'font-lock-comment-face nil :foreground "#909090")
+;;(set-face-attribute 'font-lock-comment-face nil :foreground "#909090")
+
 
 (setq c-tab-always-indent 'other)
 (setq ediff-split-window-function 'split-window-horizontally)
@@ -66,7 +67,7 @@
 (show-paren-mode 1)
 (setq show-paren-style 'expression)
 (setq show-paren-delay 0)
-(set-face-attribute 'show-paren-match-face nil :background "#d7f7d7")
+;;(set-face-attribute 'show-paren-match-face nil :background "#d7f7d7")
 
 ;; Let's figure out which OS we're running under.  We'll have to map some keys differently 
 ;; to get the same end results.
@@ -92,6 +93,16 @@
 (defun my-minibuffer-setup-hook ()
   (local-set-key (kbd "<escape>") 'keyboard-escape-quit))
 (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+
+
+;; C# Stuff
+(setq omnisharp-server-executable-path "~/bin/OmniSharpServer/OmniSharp.exe")
+(add-hook 'csharp-mode-hook 'omnisharp-mode)
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-omnisharp))
+
+
+(company-mode)
 
 
 (if window-system
